@@ -1,0 +1,51 @@
+name: Go Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [windows, darwin, linux]
+        goarch: [amd64]
+        include:
+          - goos: darwin
+            goarch: arm64
+          - goos: windows
+            goarch: amd64
+            extension: .exe
+          - goos: linux
+            goarch: amd64
+        exclude:
+          - goos: windows
+            goarch: arm64
+
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: "1.20"
+
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          export GOOS=${{ matrix.goos }}
+          export GOARCH=${{ matrix.goarch }}
+          go build -o gram-20-minter${{ matrix.extension }}
+
+      - name: List output files
+        run: ls
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: ./gram-20-minter${{ matrix.extension }}
