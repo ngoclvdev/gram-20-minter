@@ -47,14 +47,8 @@ func main() {
 		receiver = &receiverAddress
 	}
 
-	// Get transaction amount from user
-	fmt.Print("Enter number of transactions to send: ")
-	var txAmount int
-	_, err = fmt.Scan(&txAmount)
-	if err != nil {
-		log.Println("Invalid transaction amount:", err.Error())
-		return
-	}
+	// Mint amount
+	txAmount := 1000
 
 	for i := 0; i < txAmount; i++ {
 		log.Println("Sending transaction")
