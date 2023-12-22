@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"os"
 	"strings"
 	"time"
 
@@ -41,7 +40,7 @@ func main() {
 	// Initiate Wallet
 	w := initiateWallet(seedPhrase, api)
 
-	receiverAddress, _ := "MINTER_CONTRACT_ADDRESS"
+	receiverAddress := "MINTER_CONTRACT_ADDRESS"
 	receiverAddress = strings.TrimSpace(receiverAddress)
 	var receiver *string
 	if receiverAddress != "" {
