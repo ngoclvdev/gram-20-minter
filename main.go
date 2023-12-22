@@ -56,6 +56,8 @@ func main() {
 		}
 		log.Println("Sent", txAmount, "transactions")
 		txAmount -= 1
+		// Delay 1s
+		time.Sleep(1 * time.Second)
 	}
 
 }
