@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"context"
 	"fmt"
 	"log"
@@ -31,10 +30,8 @@ func main() {
 	}
 
 	api := ton.NewAPIClient(client)
-	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Print("Enter seed phrase (or press enter to generate new wallet): ")
-	seedPhraseInput, _ := reader.ReadString('\n')
+	seedPhraseInput := "YOUR_ADDRESS_SEED_PHRASE"
 	seedPhraseInput = strings.TrimSpace(seedPhraseInput)
 	var seedPhrase *string
 	if seedPhraseInput != "" {
@@ -44,8 +41,7 @@ func main() {
 	// Initiate Wallet
 	w := initiateWallet(seedPhrase, api)
 
-	fmt.Print("Enter contract address of the minter: ")
-	receiverAddress, _ := reader.ReadString('\n')
+	receiverAddress, _ := "MINTER_CONTRACT_ADDRESS"
 	receiverAddress = strings.TrimSpace(receiverAddress)
 	var receiver *string
 	if receiverAddress != "" {
